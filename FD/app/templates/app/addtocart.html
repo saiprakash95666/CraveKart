@@ -1,0 +1,77 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block title %}Cart{% endblock title %}
+
+{% block main-content %}
+<div class="container my-5 cart-wrapper">
+  {% if cart %}
+  <h1 class="text-center mb-5">Shopping Cart</h1>
+
+  <!-- Manual Flex Layout (no .row used) -->
+  <div class="d-flex flex-wrap justify-content-between">
+    
+    <!-- Left: Cart Items -->
+    <div class="col-lg-8 col-12 mb-4 pe-lg-3">
+      <div class="card">
+        <div class="card-body">
+          {% for item in cart %}
+          <div class="cart-item d-flex flex-wrap mb-4 pb-3 border-bottom">
+            <div class="col-md-4 col-12 text-center">
+              <img src="{{ item.product.product_img.url }}" class="img-fluid img-thumbnail" style="max-height: 150px;">
+            </div>
+            <div class="col-md-8 col-12 mt-3 mt-md-0">
+              <h5>{{ item.product.title }}</h5>
+              <p class="text-muted small">{{ item.product.description }}</p>
+              <div class="my-2">
+                <label>Quantity:</label>
+                <a class="btn btn-sm btn-outline-secondary minus-cart" pid="{{ item.product.id }}"><i class="fas fa-minus"></i></a>
+                <span id="quantity">{{ item.quantity }}</span>
+                <a class="btn btn-sm btn-outline-secondary plus-cart" pid="{{ item.product.id }}"><i class="fas fa-plus"></i></a>
+              </div>
+              <div class="d-flex justify-content-between align-items-center mt-2">
+                <a href="#" class="btn btn-sm btn-danger remove-cart" pid="{{ item.product.id }}">Remove</a>
+                <strong>${{ item.product.price }}</strong>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+
+    <!-- Right: Total Summary -->
+    <div class="col-lg-4 col-12">
+      <div class="card">
+        <div class="card-body">
+          <h4>Total Summary</h4>
+          <ul class="list-group mb-3">
+            <li class="list-group-item d-flex justify-content-between">
+              Amount <span id="amount">${{ amount }}</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between">
+              Delivery Charges <span>$4</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between">
+              <strong>Total</strong>
+              <strong id="totalamount">${{ totalamount }}</strong>
+            </li>
+          </ul>
+          <a href="{% url 'checkout' %}" class="btn btn-success w-100">Place Order</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  {% else %}
+  <h3 class="text-center">Your cart is empty.</h3>
+  {% endif %}
+</div>
+
+<!-- Optional tweak if flex isn't behaving due to other CSS -->
+<style>
+  .cart-wrapper .col-lg-8,
+  .cart-wrapper .col-lg-4 {
+    flex: 0 0 auto;
+  }
+</style>
+{% endblock %}

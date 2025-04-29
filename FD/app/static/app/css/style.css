@@ -1,0 +1,40 @@
+.carousel-inner .carousel-item img {
+    width: 100vw;
+    height: auto;
+    object-fit: cover;
+}
+
+.cat-text-center{
+    margin-top: 10px;
+    text-align: center;
+    font-size: 40px;
+    font-family:'Times New Roman', Times, serif;
+    color: #333;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; /* center align cards */
+    gap: 75px; /* space between cards */
+}
+
+/* Each individual card */
+.cat-card {
+    flex: 0 1 250px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.banner-cards .img-txt {
+    margin-top: 10px;
+    font-size: 20px;
+    font-weight: 600;
+    color: #333;
+    border: none;
+}
+
+.banner-cards .cat-links{
+    color: #333;
+    text-decoration: none;
+}
